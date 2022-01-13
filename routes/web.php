@@ -13,7 +13,11 @@
 
 Route::group(['middleware' => ['get.menu']], function () {
     Route::get('/', function () {
-        return view('dashboard.homepage');
+        if(\Illuminate\Support\Facades\Auth::user()){
+            return view('dashboard.homepage');
+        }else{
+            return redirect('/login');
+        }
     });
 
     Route::group(['middleware' => ['role:user']], function () {
