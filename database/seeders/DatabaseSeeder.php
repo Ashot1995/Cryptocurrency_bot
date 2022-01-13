@@ -18,8 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UsersAndNotesSeeder::class,
             MenusTableSeeder::class,
-            FolderTableSeeder::class,
-            BREADSeeder::class,
         ]);
     }
 }

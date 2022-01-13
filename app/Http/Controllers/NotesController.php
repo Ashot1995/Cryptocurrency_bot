@@ -38,8 +38,7 @@ class NotesController extends Controller
      */
     public function create()
     {
-        $statuses = Status::all();
-        return view('dashboard.notes.create', ['statuses' => $statuses]);
+        return view('dashboard.notes.create');
     }
 
     /**

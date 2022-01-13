@@ -187,7 +187,7 @@ class MenusTableSeeder extends Seeder
 //        $this->insertLink('user,admin', 'Widgets', '/widgets', 'cil-calculator');
 
         $this->insertTitle('user,admin', 'Cryptocurrency');
-        $this->insertLink('user,admin', 'Crypto',     '/notes');
+        $this->insertLink('user,admin', 'Биржа',     '/notes');
 
         $this->insertTitle('user,admin', 'Extras');
         $this->beginDropdown('user,admin', 'Pages', 'cil-star');
@@ -212,7 +212,6 @@ class MenusTableSeeder extends Seeder
         $id = $this->insertLink('admin', 'Edit menu',               '/menu/menu');
         $id = $this->insertLink('admin', 'Edit menu elements',      '/menu/element');
         $id = $this->insertLink('admin', 'Edit roles',              '/roles');
-        $id = $this->insertLink('admin', 'Media',                   '/media');
         $id = $this->insertLink('admin', 'BREAD',                   '/bread');
         $this->endDropdown();
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFolderTable extends Migration
+class CreateBotsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateFolderTable extends Migration
      */
     public function up()
     {
-        Schema::create('folder', function (Blueprint $table) {
+        Schema::create('bots', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('exchange');
+            $table->text('key');
+            $table->text('secret_key');
+            $table->integer('users_id')->unsigned();
             $table->timestamps();
-            $table->string('name');
-            $table->integer('folder_id')->unsigned()->nullable();
-            $table->boolean('resource')->nullable();
         });
     }
 
@@ -29,6 +30,6 @@ class CreateFolderTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('folder');
+        Schema::dropIfExists('bots');
     }
 }

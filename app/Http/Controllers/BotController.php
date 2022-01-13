@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bots;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Models\Notes;
-use App\Models\Status;
 
 class BotController extends Controller
 {
@@ -27,8 +25,8 @@ class BotController extends Controller
      */
     public function index()
     {
-        $bots = Bot::with('user')->paginate(20);
-        return view('dashboard.bot.botList', ['bots' => $bots]);
+        $bots = Bots::with('user')->paginate(20);
+        return view('dashboard.bots.botList', ['bots' => $bots]);
     }
 
     /**
@@ -38,7 +36,7 @@ class BotController extends Controller
      */
     public function create()
     {
-     return view('dashboard.bot.create');
+        return view('dashboard.bots.create');
     }
 
     /**
@@ -55,7 +53,7 @@ class BotController extends Controller
             'secret_key' => 'required',
         ]);
         $user = auth()->user();
-        $note = new Notes();
+        $note = new Bots();
         $note->exchange = $request->input('exchange');
         $note->key = $request->input('key');
         $note->secret_key = $request->input('secret_key');
@@ -73,8 +71,8 @@ class BotController extends Controller
      */
     public function show($id)
     {
-        $note = Notes::with('user')->with('status')->find($id);
-        return view('dashboard.notes.noteShow', ['note' => $note]);
+        $bot = Bots::with('user')->find($id);
+        return view('dashboard.bots.botsShow', ['bot' => $bot]);
     }
 
     /**
@@ -85,8 +83,8 @@ class BotController extends Controller
      */
     public function edit($id)
     {
-        $note = Notes::find($id);
-        return view('dashboard.notes.edit', ['note' => $note]);
+        $bot = Bots::find($id);
+        return view('dashboard.bots.edit', ['bot' => $bot]);
     }
 
     /**
@@ -105,13 +103,13 @@ class BotController extends Controller
             'key' => 'required',
             'secret_key' => 'required',
         ]);
-        $note = Notes::find($id);
+        $note = Bots::find($id);
         $note->exchange = $request->input('exchange');
         $note->key = $request->input('key');
         $note->secret_key = $request->input('secret_key');
         $note->save();
         $request->session()->flash('message', 'Successfully edited note');
-        return redirect()->route('notes.index');
+        return redirect()->route('bots.index');
     }
 
     /**
@@ -122,10 +120,10 @@ class BotController extends Controller
      */
     public function destroy($id)
     {
-        $note = Notes::find($id);
+        $note = Bots::find($id);
         if ($note) {
             $note->delete();
         }
-        return redirect()->route('notes.index');
+        return redirect()->route('bots.index');
     }
 }

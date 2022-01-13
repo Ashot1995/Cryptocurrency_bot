@@ -142,9 +142,6 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::resource('bread', 'BreadController');   //create BREAD (resource)
         Route::resource('users', 'UsersController')->except(['create', 'store']);
         Route::resource('roles', 'RolesController');
-        Route::resource('mail', 'MailController');
-        Route::get('prepareSend/{id}', 'MailController@prepareSend')->name('prepareSend');
-        Route::post('mailSend/{id}', 'MailController@send')->name('mailSend');
         Route::get('/roles/move/move-up', 'RolesController@moveUp')->name('roles.up');
         Route::get('/roles/move/move-down', 'RolesController@moveDown')->name('roles.down');
         Route::prefix('menu/element')->group(function () {
@@ -166,22 +163,6 @@ Route::group(['middleware' => ['get.menu']], function () {
             Route::get('/edit', 'MenuController@edit')->name('menu.menu.edit');
             Route::post('/update', 'MenuController@update')->name('menu.menu.update');
             Route::get('/delete', 'MenuController@delete')->name('menu.menu.delete');
-        });
-        Route::prefix('media')->group(function () {
-            Route::get('/', 'MediaController@index')->name('media.folder.index');
-            Route::get('/folder/store', 'MediaController@folderAdd')->name('media.folder.add');
-            Route::post('/folder/update', 'MediaController@folderUpdate')->name('media.folder.update');
-            Route::get('/folder', 'MediaController@folder')->name('media.folder');
-            Route::post('/folder/move', 'MediaController@folderMove')->name('media.folder.move');
-            Route::post('/folder/delete', 'MediaController@folderDelete')->name('media.folder.delete');;
-
-            Route::post('/file/store', 'MediaController@fileAdd')->name('media.file.add');
-            Route::get('/file', 'MediaController@file');
-            Route::post('/file/delete', 'MediaController@fileDelete')->name('media.file.delete');
-            Route::post('/file/update', 'MediaController@fileUpdate')->name('media.file.update');
-            Route::post('/file/move', 'MediaController@fileMove')->name('media.file.move');
-            Route::post('/file/cropp', 'MediaController@cropp');
-            Route::get('/file/copy', 'MediaController@fileCopy')->name('media.file.copy');
         });
     });
 });
