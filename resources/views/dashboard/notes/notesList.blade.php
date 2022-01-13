@@ -8,50 +8,30 @@
               <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="card">
                     <div class="card-header">
-                      <i class="fa fa-align-justify"></i>{{ __('Crypto') }}</div>
+                      <i class="fa fa-align-justify"></i>{{ __('Мои биржи') }}</div>
                     <div class="card-body">
                         <div class="row">
-                          <a href="{{ route('notes.create') }}" class="btn btn-primary m-2">{{ __('Add  cryptocurrency') }}</a>
+                          <a href="{{ route('notes.create') }}" class="btn btn-primary m-2">{{ __('Добавить') }}</a>
                         </div>
                         <br>
                         <table class="table table-responsive-sm table-striped">
                         <thead>
                           <tr>
-                            <th>Author</th>
-                            <th>Title</th>
-                            <th>Content</th>
-                            <th>Applies to date</th>
-                            <th>Status</th>
-                            <th>Note type</th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
+                            <th>Биржа</th>
+                            <th>API ключ</th>
+                            <th>Удалить</th>
                           </tr>
                         </thead>
                         <tbody>
                           @foreach($notes as $note)
                             <tr>
-                              <td><strong>{{ $note->user->name }}</strong></td>
-                              <td><strong>{{ $note->title }}</strong></td>
-                              <td>{{ $note->content }}</td>
-                              <td>{{ $note->applies_to_date }}</td>
-                              <td>
-                                  <span class="{{ $note->status->class }}">
-                                      {{ $note->status->name }}
-                                  </span>
-                              </td>
-                              <td><strong>{{ $note->note_type }}</strong></td>
-                              <td>
-                                <a href="{{ url('/notes/' . $note->id) }}" class="btn btn-block btn-primary">View</a>
-                              </td>
-                              <td>
-                                <a href="{{ url('/notes/' . $note->id . '/edit') }}" class="btn btn-block btn-primary">Edit</a>
-                              </td>
-                              <td>
+                              <td><strong>{{ $note->exchange }}</strong></td>
+                              <td><strong>{{ $note->key }}</strong></td>
+                                <td>
                                 <form action="{{ route('notes.destroy', $note->id ) }}" method="POST">
                                     @method('DELETE')
                                     @csrf
-                                    <button class="btn btn-block btn-danger">Delete</button>
+                                    <button class="btn btn-block btn-danger">Удалить</button>
                                 </form>
                               </td>
                             </tr>

@@ -8,7 +8,7 @@
               <div class="col-sm-12 col-md-10 col-lg-8 col-xl-6">
                 <div class="card">
                     <div class="card-header">
-                      <i class="fa fa-align-justify"></i> {{ __('Edit') }}: {{ $note->title }}</div>
+                      <i class="fa fa-align-justify"></i> {{ __('Изменить') }}: {{ $note->title }}</div>
                     <div class="card-body">
                         <form method="POST" action="/notes/{{ $note->id }}">
                             @csrf
@@ -55,9 +55,9 @@
                                     <input class="form-control" type="text" placeholder="{{ __('Note type') }}" name="note_type" value="{{ $note->note_type }}" required>
                                 </div>
                             </div>
- 
+
                             <button class="btn btn-block btn-success" type="submit">{{ __('Save') }}</button>
-                            <a href="{{ route('notes.index') }}" class="btn btn-block btn-primary">{{ __('Return') }}</a> 
+                            <a href="{{ route('notes.index') }}" class="btn btn-block btn-primary">{{ __('Return') }}</a>
                         </form>
                     </div>
                 </div>

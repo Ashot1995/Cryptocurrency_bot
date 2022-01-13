@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Notes;
 use App\Models\Status;
 
-class NotesController extends Controller
+class BotController extends Controller
 {
 
     /**
@@ -27,8 +27,8 @@ class NotesController extends Controller
      */
     public function index()
     {
-        $notes = Notes::with('user')->paginate(20);
-        return view('dashboard.notes.notesList', ['notes' => $notes]);
+        $bots = Bot::with('user')->paginate(20);
+        return view('dashboard.bot.botList', ['bots' => $bots]);
     }
 
     /**
@@ -38,8 +38,7 @@ class NotesController extends Controller
      */
     public function create()
     {
-        $statuses = Status::all();
-        return view('dashboard.notes.create', ['statuses' => $statuses]);
+     return view('dashboard.bot.create');
     }
 
     /**
