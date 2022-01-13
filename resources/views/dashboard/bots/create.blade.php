@@ -18,7 +18,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label>API ключ</label>
+                                <label>????</label>
                                 <input type="text" class="form-control" name="key" required/>
                             </div>
                             <div class="form-group row">

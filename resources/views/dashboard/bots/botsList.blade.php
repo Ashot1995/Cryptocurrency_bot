@@ -19,7 +19,7 @@
                         <thead>
                           <tr>
                             <th>Биржа</th>
-                            <th>API ключ</th>
+                            <th>????</th>
                             <th>Удалить</th>
                           </tr>
                         </thead>
