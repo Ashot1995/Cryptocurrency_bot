@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Bots;
 use Illuminate\Http\Request;
 
-class BotController extends Controller
+class BotsController extends Controller
 {
 
     /**
@@ -26,7 +26,7 @@ class BotController extends Controller
     public function index()
     {
         $bots = Bots::with('user')->paginate(20);
-        return view('dashboard.bots.botList', ['bots' => $bots]);
+        return view('dashboard.bots.botsList', ['bots' => $bots]);
     }
 
     /**
@@ -60,7 +60,7 @@ class BotController extends Controller
         $note->users_id = $user->id;
         $note->save();
         $request->session()->flash('message', 'Successfully created note');
-        return redirect()->route('notes.index');
+        return redirect()->route('bots.index');
     }
 
     /**

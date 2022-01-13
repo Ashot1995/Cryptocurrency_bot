@@ -188,6 +188,7 @@ class MenusTableSeeder extends Seeder
 
         $this->insertTitle('user,admin', 'Cryptocurrency');
         $this->insertLink('user,admin', 'Биржа',     '/notes');
+        $this->insertLink('user,admin', 'Бот',     '/bots');
 
         $this->insertTitle('user,admin', 'Extras');
         $this->beginDropdown('user,admin', 'Pages', 'cil-star');

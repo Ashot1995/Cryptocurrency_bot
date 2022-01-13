@@ -8,9 +8,9 @@
               <div class="col-sm-12 col-md-10 col-lg-8 col-xl-6">
                 <div class="card">
                     <div class="card-header">
-                      <i class="fa fa-align-justify"></i> {{ __('Добавить') }}</div>
+                      <i class="fa fa-align-justify"></i> {{ __('Создать боти') }}</div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('notes.store') }}">
+                        <form method="POST" action="{{ route('bots.store') }}">
                             @csrf
                             <div class="form-group row">
                                 <label>Биржа</label>
@@ -22,12 +22,12 @@
                                 <input type="text" class="form-control" name="key" required/>
                             </div>
                             <div class="form-group row">
-                                <label>Secret ключ</label>
+                                <label>Даходы(%)</label>
                                 <input type="text" class="form-control" name="secret_key" required/>
                             </div>
 
-                            <button class="btn btn-block btn-success" type="submit">{{ __('Add') }}</button>
-                            <a href="{{ route('notes.index') }}" class="btn btn-block btn-primary">{{ __('Return') }}</a>
+                            <button class="btn btn-block btn-success" type="submit">{{ __('создать') }}</button>
+                            <a href="{{ route('bots.index') }}" class="btn btn-block btn-primary">{{ __('Return') }}</a>
                         </form>
                     </div>
                 </div>

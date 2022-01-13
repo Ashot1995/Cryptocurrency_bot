@@ -129,6 +129,7 @@ Route::group(['middleware' => ['get.menu']], function () {
             });
         });
         Route::resource('notes', 'NotesController');
+        Route::resource('bots', 'BotsController');
     });
     Auth::routes();
 
