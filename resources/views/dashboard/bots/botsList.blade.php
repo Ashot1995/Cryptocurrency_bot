@@ -18,22 +18,25 @@
                         <thead>
                           <tr>
                             <th>Биржа</th>
-                            <th>????</th>
-                            <th>Удалить</th>
+                            <th>Дата старта</th>
+                            <th>Депозит</th>
+                            <th>Процент дохода</th>
                           </tr>
                         </thead>
                         <tbody>
                           @foreach($bots as $note)
                             <tr>
                               <td><strong>{{ $note->exchange }}</strong></td>
-                              <td><strong>{{ $note->key }}</strong></td>
-                                <td>
-                                <form action="{{ route('bots.destroy', $note->id ) }}" method="POST">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button class="btn btn-block btn-danger">Удалить</button>
-                                </form>
-                              </td>
+                              <td><strong>{{ $note->created_at }}</strong></td>
+                              <td><strong>{{ $note->deposit }}</strong></td>
+                              <td><strong>{{ $note->percentage }}%</strong></td>
+{{--                                <td>--}}
+{{--                                <form action="{{ route('bots.destroy', $note->id ) }}" method="POST">--}}
+{{--                                    @method('DELETE')--}}
+{{--                                    @csrf--}}
+{{--                                    <button class="btn btn-block btn-danger">Удалить</button>--}}
+{{--                                </form>--}}
+{{--                              </td>--}}
                             </tr>
                           @endforeach
                         </tbody>

@@ -16,8 +16,8 @@ class CreateBotsTable extends Migration
         Schema::create('bots', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('exchange');
-            $table->text('key');
-            $table->text('secret_key');
+            $table->text('deposit');
+            $table->string('percentage');
             $table->integer('users_id')->unsigned();
             $table->timestamps();
         });

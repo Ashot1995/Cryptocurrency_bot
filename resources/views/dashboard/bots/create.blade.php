@@ -18,12 +18,12 @@
                             </div>
 
                             <div class="form-group row">
-                                <label>????</label>
-                                <input type="text" class="form-control" name="key" required/>
+                                <label>Депозит</label>
+                                <input type="text" class="form-control" name="deposit" required/>
                             </div>
                             <div class="form-group row">
-                                <label>Даходы(%)</label>
-                                <input type="text" class="form-control" name="secret_key" required/>
+                                <label>Процент дохода(%)</label>
+                                <input type="number" min="1" max="100" class="form-control" name="percentage" required/>
                             </div>
 
                             <button class="btn btn-block btn-success" type="submit">{{ __('создать') }}</button>

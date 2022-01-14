@@ -49,14 +49,14 @@ class BotsController extends Controller
     {
         $validatedData = $request->validate([
             'exchange' => 'required|min:1|max:64',
-            'key' => 'required',
-            'secret_key' => 'required',
+            'deposit' => 'required',
+            'percentage' => 'required',
         ]);
         $user = auth()->user();
         $note = new Bots();
         $note->exchange = $request->input('exchange');
-        $note->key = $request->input('key');
-        $note->secret_key = $request->input('secret_key');
+        $note->deposit = $request->input('deposit');
+        $note->percentage = $request->input('percentage');
         $note->users_id = $user->id;
         $note->save();
         $request->session()->flash('message', 'Successfully created note');
@@ -100,13 +100,13 @@ class BotsController extends Controller
         //die();
         $validatedData = $request->validate([
             'exchange' => 'required|min:1|max:64',
-            'key' => 'required',
-            'secret_key' => 'required',
+            'deposit' => 'required',
+            'percentage' => 'required',
         ]);
         $note = Bots::find($id);
         $note->exchange = $request->input('exchange');
-        $note->key = $request->input('key');
-        $note->secret_key = $request->input('secret_key');
+        $note->deposit = $request->input('deposit');
+        $note->percentage = $request->input('percentage');
         $note->save();
         $request->session()->flash('message', 'Successfully edited note');
         return redirect()->route('bots.index');

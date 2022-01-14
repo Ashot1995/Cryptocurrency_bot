@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Http;
+
 Route::group(['middleware' => ['get.menu']], function () {
     Route::get('/', function () {
         if(\Illuminate\Support\Facades\Auth::user()){
