@@ -14,7 +14,7 @@
                         <div class="row">
                           <a href="{{ route('bots.create') }}" class="btn btn-primary m-2">{{ __('Добавить') }}</a>
                         </div>
-                        <br>
+                        <br>Account
                         <table class="table table-responsive-sm table-striped">
                         <thead>
                           <tr>
