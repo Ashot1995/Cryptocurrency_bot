@@ -9,7 +9,6 @@
                 <div class="card">
                     <div class="card-header">
                       <i class="fa fa-align-justify"></i>{{ __('Управление ботами') }}</div>
-                      <i class="fa fa-align-justify"></i>{{ __('Мои боти') }}</div>
                     <div class="card-body">
                         <div class="row">
                           <a href="{{ route('bots.create') }}" class="btn btn-primary m-2">{{ __('Добавить') }}</a>
