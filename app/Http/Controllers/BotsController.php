@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\API3commas;
 use App\Models\Bots;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class BotsController extends Controller
 {
@@ -25,6 +27,7 @@ class BotsController extends Controller
      */
     public function index()
     {
+//        Http::post("https://api.telegram.org/bot5082214307:AAFiNfmQ6HWt91mMtQt9crxAtZSFRRlMDDM/sendMessage?chat_id=755655480&text=my sample text");
         $bots = Bots::with('user')->paginate(20);
         return view('dashboard.bots.botsList', ['bots' => $bots]);
     }
