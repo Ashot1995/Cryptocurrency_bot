@@ -62,7 +62,7 @@ class NotesController extends Controller
         $note->secret_key = $request->input('secret_key');
         $note->users_id = $user->id;
         $note->save();
-        Http::post("https://api.telegram.org/bot5082214307:AAFiNfmQ6HWt91mMtQt9crxAtZSFRRlMDDM/sendMessage?chat_id=755655480&text=биржа с именем  ". $request->input('exchange') . "  создана успешно!! " .date("Y-m-d | h:i:sa"));
+        Http::post("https://api.telegram.org/bot5082214307:AAFiNfmQ6HWt91mMtQt9crxAtZSFRRlMDDM/sendMessage?chat_id=755655480&text=биржа с именем  ". $request->input('exchange') . "  создана успешно!! " .date("Y-m-d"));
         $request->session()->flash('message', 'Successfully created note');
         return redirect()->route('notes.index');
     }
