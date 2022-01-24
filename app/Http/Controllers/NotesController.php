@@ -72,7 +72,7 @@ class NotesController extends Controller
         $note->save();
         Http::post("https://api.telegram.org/bot5082214307:AAFiNfmQ6HWt91mMtQt9crxAtZSFRRlMDDM/sendMessage?chat_id=755655480&text=биржа с именем  ". $request->input('exchange') . "  создана успешно!! " .date("Y-m-d"));
 
-        $res = (API3commas::callAPI('POST','/public/api/ver1/accounts/new?name='.$request->input('exchange').'&type='.$request->input('type').'&api_key='.$request->input('key').'&secret='.$request->input('secret_key').'&customer_id='.Auth::user()->id, false));
+        API3commas::callAPI('POST','/public/api/ver1/accounts/new?name='.$request->input('exchange').'&type='.$request->input('type').'&api_key='.$request->input('key').'&secret='.$request->input('secret_key').'&customer_id='.Auth::user()->id, false);
         $request->session()->flash('message', 'Successfully created note');
         return redirect()->route('notes.index');
     }
