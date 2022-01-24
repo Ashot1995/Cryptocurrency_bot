@@ -11,7 +11,7 @@ class Notes extends Model
     use HasFactory;
 
     protected $table = 'notes';
-
+    protected $fillable = ['exchange','type','key','secret_key'];
     /**
      * Get the User that owns the Notes.
      */

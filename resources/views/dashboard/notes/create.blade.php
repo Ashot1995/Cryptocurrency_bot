@@ -9,12 +9,25 @@
                 <div class="card">
                     <div class="card-header">
                       <i class="fa fa-align-justify"></i> {{ __('Добавить') }}</div>
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <div>{{$error}}</div>
+                        @endforeach
+                    @endif
                     <div class="card-body">
                         <form method="POST" action="{{ route('notes.store') }}">
                             @csrf
                             <div class="form-group row">
                                 <label>Биржа</label>
                                 <input class="form-control" type="text" placeholder="{{ __('Биржа') }}" name="exchange" required autofocus>
+                            </div>
+                            <div class="form-group row">
+                                <label>Тип</label>
+                                <select name="type" id="" class="form-control">
+                                    @foreach($marketLists as $marketList)
+                                        <option value="{{$marketList->market_code}}">{{$marketList->market_name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <div class="form-group row">

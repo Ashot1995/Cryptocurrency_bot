@@ -3,9 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="39b12e05-8263-4d04-9438-a2453fe84f7a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BotsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BotsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Helper/API3commas.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helper/API3commas.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NotesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NotesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/MenusTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/MenusTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Notes.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Notes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_11_085455_create_notes_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_11_085455_create_notes_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/notes/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/notes/create.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,7 +191,7 @@
       <workItem from="1642189590783" duration="3551000" />
       <workItem from="1642512469626" duration="5233000" />
       <workItem from="1642665295967" duration="4057000" />
-      <workItem from="1643008954966" duration="398000" />
+      <workItem from="1643008954966" duration="5721000" />
     </task>
     <servers />
   </component>
