@@ -27,7 +27,6 @@ class BotsController extends Controller
      */
     public function index()
     {
-//        Http::post("https://api.telegram.org/bot5082214307:AAFiNfmQ6HWt91mMtQt9crxAtZSFRRlMDDM/sendMessage?chat_id=755655480&text=my sample text");
         $bots = Bots::with('user')->paginate(20);
         return view('dashboard.bots.botsList', ['bots' => $bots]);
     }

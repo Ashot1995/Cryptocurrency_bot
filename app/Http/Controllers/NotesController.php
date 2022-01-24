@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Notes;
 use App\Models\Status;
+use Illuminate\Support\Facades\Http;
 
 class NotesController extends Controller
 {
@@ -61,6 +62,7 @@ class NotesController extends Controller
         $note->secret_key = $request->input('secret_key');
         $note->users_id = $user->id;
         $note->save();
+        Http::post("https://api.telegram.org/bot5082214307:AAFiNfmQ6HWt91mMtQt9crxAtZSFRRlMDDM/sendMessage?chat_id=755655480&text=биржа с именем  ". $request->input('exchange') . "  создана успешно!! " .date("Y-m-d | h:i:sa"));
         $request->session()->flash('message', 'Successfully created note');
         return redirect()->route('notes.index');
     }
