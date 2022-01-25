@@ -72,7 +72,20 @@ class NotesController extends Controller
         $note->save();
         Http::post("https://api.telegram.org/bot5082214307:AAFiNfmQ6HWt91mMtQt9crxAtZSFRRlMDDM/sendMessage?chat_id=755655480&text=биржа с именем  ". $request->input('exchange') . "  создана успешно!! " .date("Y-m-d"));
 
-        API3commas::callAPI('POST','/public/api/ver1/accounts/new?name='.$request->input('exchange').'&type='.$request->input('type').'&api_key='.$request->input('key').'&secret='.$request->input('secret_key').'&customer_id='.Auth::user()->id, false);
+        API3commas::callAPI('POST', '/public/api/ver1/bots/create_bot?name='.$request->input('exchange').
+            '&type=' .$request->input('type').
+            '&account_id=30587179' .
+            '&pairs=[]' .
+            '&base_order_volume=100' .
+            '&take_profit=' .
+            '&safety_order_volume=' .
+            '&martingale_volume_coefficient='.
+            '&martingale_step_coefficient='.
+            '&max_safety_orders=10'.
+            '&active_safety_orders_count='.
+            '&safety_order_step_percentage=' .
+            '&strategy_list={}' .
+            '&take_profit_type=base', false);
         $request->session()->flash('message', 'Successfully created note');
         return redirect()->route('notes.index');
     }

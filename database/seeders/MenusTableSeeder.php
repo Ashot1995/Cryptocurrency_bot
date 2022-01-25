@@ -135,14 +135,6 @@ class MenusTableSeeder extends Seeder
         ]);
         $this->menuId = DB::getPdo()->lastInsertId();  //set menuId
         $this->insertLink('guest,user,admin', 'Dashboard', '/', 'cil-speedometer');
-//        $this->beginDropdown('admin', 'Settings', 'cil-calculator');
-//            $this->insertLink('admin', 'Notes',                   '/notes');
-//            $this->insertLink('admin', 'Users',                   '/users');
-//            $this->insertLink('admin', 'Edit menu',               '/menu/menu');
-//            $this->insertLink('admin', 'Edit menu elements',      '/menu/element');
-//            $this->insertLink('admin', 'Edit roles',              '/roles');
-//            $this->insertLink('admin', 'Media',                   '/media');
-//            $this->insertLink('admin', 'BREAD',                   '/bread');
         $this->endDropdown();
         $this->insertLink('guest', 'Login', '/login', 'cil-account-logout');
         $this->insertLink('guest', 'Register', '/register', 'cil-account-logout');
@@ -150,6 +142,7 @@ class MenusTableSeeder extends Seeder
         $this->insertTitle('user,admin', 'Cryptocurrency');
         $this->insertLink('user,admin', 'Биржа',     '/notes');
         $this->insertLink('user,admin', 'Бот',     '/bots');
+        $this->insertLink('user,admin', 'Статистика',     '/statistics');
 
 
 
