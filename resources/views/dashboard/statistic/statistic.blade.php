@@ -21,7 +21,6 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @dd($bots)
                                 @foreach($bots as $bot)
                                     <tr>
                                         <td><strong>{{ $bot->name }}</strong></td>
