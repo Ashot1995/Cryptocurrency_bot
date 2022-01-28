@@ -31,22 +31,35 @@ class BotsController extends Controller
         return view('dashboard.bots.botsList', ['bots' => $bots]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        return view('dashboard.bots.create');
+        $bots = json_decode(API3commas::callAPI('GET', '/public/api/ver1/accounts', false));
+
+        return view('dashboard.bots.create',compact('bots'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
+    private function prepareCreateBotRequestUri($data): string
+    {
+        return '/public/api/ver1/bots/create_bot?' . collect([
+                'name'                          => $data['exchange'],
+                'account_id'                    => 30587176,
+                'pairs'                         => urlencode("['BTC_LTC']"),
+                'base_order_volume'             => 100,
+                'take_profit'                   => 0.05,
+                'safety_order_volume'           => 0.1,
+                'martingale_volume_coefficient' => 1,
+                'martingale_step_coefficient'   => 1,
+                'max_safety_orders'             => 10,
+                'active_safety_orders_count'    => $data['deposit'],
+                'safety_order_step_percentage'  => $data['percentage'],
+                'take_profit_type'              => 'base',
+                'strategy_list'                 => urlencode(json_encode([['strategy' => 'manual']])),
+            ])->map(function ($value, $key) {
+                return $key . '=' . $value;
+            })->join('&');
+    }
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -54,6 +67,11 @@ class BotsController extends Controller
             'deposit' => 'required',
             'percentage' => 'required',
         ]);
+
+        API3commas::execute('post', $this->prepareCreateBotRequestUri(
+            $request->all())
+        );
+
         $user = auth()->user();
         $note = new Bots();
         $note->exchange = $request->input('exchange');

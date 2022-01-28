@@ -21,7 +21,14 @@
                                 <label>Биржа</label>
                                 <input class="form-control" type="text" placeholder="{{ __('Биржа') }}" name="exchange" required autofocus>
                             </div>
-
+                            <div class="form-group row">
+                                <label>Тип</label>
+                                <select name="type" id="" class="form-control">
+                                    @foreach($marketLists as $marketList)
+                                        <option value="{{$marketList->market_code}}">{{$marketList->market_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <div class="form-group row">
                                 <label>API ключ</label>
                                 <input type="text" class="form-control" name="key" required/>

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Http;
 Route::group(['middleware' => ['get.menu']], function () {
     Route::get('/', function () {
         if(\Illuminate\Support\Facades\Auth::user()){
-            return view('dashboard.homepage');
+            return redirect('/notes');
         }else{
             return redirect('/login');
         }
