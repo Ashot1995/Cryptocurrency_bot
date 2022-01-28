@@ -18,6 +18,8 @@ use Illuminate\View\View;
 
 class NotesController extends Controller
 {
+    const API_KEY = "1523c6d6933641e38da8c09bef44ce34c219da76781447c8a6f393bb632fceab";
+    const SECRET = "8495c1825f16b0473b3b7a1dd712a889e0cb6b9e53001eda9e59d39808b65151b43f317f0ea6b5a57f54d01e19419678d7856a0260e168894579692ddc3c1ca8aa79167b9f46149c48acc52eb3ef08fff0115f716cf6ae24ab1b7a071fd19c23b006d0d7";
 
     /**
      * Create a new controller instance.
@@ -49,43 +51,55 @@ class NotesController extends Controller
 
         return view('dashboard.notes.create',['marketLists' => $marketLists]);
     }
+    private function prepareCreateBotRequestUri($name,): string
+    {
+        return '/public/api/ver1/bots/create_bot?' . collect([
+                'name'                          => $name,
+                'account_id'                    => 30587176,
+                'pairs'                         => urlencode("['BTC_LTC']"),
+                'base_order_volume'             => 100,
+                'take_profit'                   => 0.05,
+                'safety_order_volume'           => 0.1,
+                'martingale_volume_coefficient' => 1,
+                'martingale_step_coefficient'   => 1,
+                'max_safety_orders'             => 10,
+                'active_safety_orders_count'    => 50,
+                'safety_order_step_percentage'  => 5,
+                'take_profit_type'              => 'base',
+                'strategy_list'                 => urlencode(json_encode([['strategy' => 'manual']])),
+            ])->map(function ($value, $key) {
+                return $key . '=' . $value;
+            })->join('&');
+    }
 
     /**
      * @param Request $request
-     * @return Application|RedirectResponse|Redirector
+     * @return RedirectResponse
+     * @throws \Exception
      */
     public function store(Request $request)
     {
+        if (self::API_KEY != $request->get('key') && self::SECRET != $request->get('secret_key') ){
+            return redirect()->back()->withErrors(['msg' => 'api key or secret  is not valid']);
+        }
+        API3commas::execute('post', $this->prepareCreateBotRequestUri($request->input('exchange')),$request->input('key'),$request->input('secret_key'));
         $validatedData = $request->validate([
             'exchange' => 'required|min:1|max:64',
-            'type' => 'required|min:1|max:64',
             'key' => 'required',
             'secret_key' => 'required',
         ]);
+        if ($validatedData->fails()){
+            return redirect()->back()->withErrors($validatedData)->withInput();
+        }
         $user = auth()->user();
         $note = new Notes();
         $note->exchange = $request->input('exchange');
-        $note->type = $request->input('type');
         $note->key = $request->input('key');
         $note->secret_key = $request->input('secret_key');
         $note->users_id = $user->id;
         $note->save();
         Http::post("https://api.telegram.org/bot5082214307:AAFiNfmQ6HWt91mMtQt9crxAtZSFRRlMDDM/sendMessage?chat_id=755655480&text=биржа с именем  ". $request->input('exchange') . "  создана успешно!! " .date("Y-m-d"));
 
-        API3commas::callAPI('POST', '/public/api/ver1/bots/create_bot?name='.$request->input('exchange').
-            '&type=' .$request->input('type').
-            '&account_id=30587179' .
-            '&pairs=[]' .
-            '&base_order_volume=100' .
-            '&take_profit=' .
-            '&safety_order_volume=' .
-            '&martingale_volume_coefficient='.
-            '&martingale_step_coefficient='.
-            '&max_safety_orders=10'.
-            '&active_safety_orders_count='.
-            '&safety_order_step_percentage=' .
-            '&strategy_list={}' .
-            '&take_profit_type=base', false);
         $request->session()->flash('message', 'Successfully created note');
         return redirect()->route('notes.index');
     }

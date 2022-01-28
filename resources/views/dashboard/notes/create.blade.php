@@ -11,7 +11,7 @@
                       <i class="fa fa-align-justify"></i> {{ __('Добавить') }}</div>
                     @if ($errors->any())
                         @foreach ($errors->all() as $error)
-                            <div>{{$error}}</div>
+                            <div style="color: red">{{$error}}</div>
                         @endforeach
                     @endif
                     <div class="card-body">
@@ -20,14 +20,6 @@
                             <div class="form-group row">
                                 <label>Биржа</label>
                                 <input class="form-control" type="text" placeholder="{{ __('Биржа') }}" name="exchange" required autofocus>
-                            </div>
-                            <div class="form-group row">
-                                <label>Тип</label>
-                                <select name="type" id="" class="form-control">
-                                    @foreach($marketLists as $marketList)
-                                        <option value="{{$marketList->market_code}}">{{$marketList->market_name}}</option>
-                                    @endforeach
-                                </select>
                             </div>
 
                             <div class="form-group row">
