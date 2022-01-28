@@ -32,7 +32,7 @@
                                         <td><strong>{{ $bot->min_price }}</strong></td>
                                         <td><strong>{{ $bot->max_price }}</strong></td>
                                         <td><strong>{{ $bot->safety_order_step_percentage }}</strong></td>
-                                        <td><strong>{{ $bot->is_enabled ? 'Актив' : 'Не активно' }}</strong></td>
+                                        <td><strong>{{ $bot->is_enabled ? 'Актив' : 'Завершённые' }}</strong></td>
                                     </tr>
                                 @endforeach
                                 </tbody>
