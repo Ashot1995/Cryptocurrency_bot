@@ -51,7 +51,7 @@ class NotesController extends Controller
 
         return view('dashboard.notes.create',['marketLists' => $marketLists]);
     }
-    private function prepareCreateBotRequestUri($name,): string
+    private function prepareCreateBotRequestUri($name): string
     {
         return '/public/api/ver1/bots/create_bot?' . collect([
                 'name'                          => $name,

@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="39b12e05-8263-4d04-9438-a2453fe84f7a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Helper/API3commas.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helper/API3commas.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NotesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NotesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/StatisticsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/StatisticsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_11_085455_create_notes_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_11_085455_create_notes_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/notes/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/notes/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/statistic/statistic.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/statistic/statistic.blade.php" afterDir="false" />
-    </list>
+    <list default="true" id="39b12e05-8263-4d04-9438-a2453fe84f7a" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
