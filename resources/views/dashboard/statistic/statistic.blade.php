@@ -14,13 +14,20 @@
                                 <thead>
                                 <tr>
                                     <th>Биржа</th>
+                                    <th>Дата создание</th>
+                                    <th>Тип</th>
+                                    <th>Процент</th>
                                     <th>Статус</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @dd($bots)
                                 @foreach($bots as $bot)
                                     <tr>
                                         <td><strong>{{ $bot->name }}</strong></td>
+                                        <td><strong>{{ $bot->created_at }}</strong></td>
+                                        <td><strong>{{ $bot->type }}</strong></td>
+                                        <td><strong>{{ $bot->safety_order_step_percentage }}</strong></td>
                                         <td><strong>{{ $bot->is_enabled ? 'Актив' : 'Не активно' }}</strong></td>
                                     </tr>
                                 @endforeach
