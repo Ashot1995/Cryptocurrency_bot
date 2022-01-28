@@ -14,9 +14,12 @@
                             @csrf
                             <div class="form-group row">
                                 <label>Биржа</label>
-                                <input class="form-control" type="text" placeholder="{{ __('Биржа') }}" name="exchange" required autofocus>
+                                <select name="type" id="" class="form-control">
+                                    @foreach($bots as $bot)
+                                        <option value="{{$bot->id}}">{{$bot->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
-
                             <div class="form-group row">
                                 <label>Депозит</label>
                                 <input type="text" class="form-control" name="deposit" required/>

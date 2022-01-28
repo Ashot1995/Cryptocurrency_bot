@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Http;
 class API3commas
 {
     const API_URL = "https://api.3commas.io";
+    const API_KEY = "1523c6d6933641e38da8c09bef44ce34c219da76781447c8a6f393bb632fceab";
+    const SECRET = "8495c1825f16b0473b3b7a1dd712a889e0cb6b9e53001eda9e59d39808b65151b43f317f0ea6b5a57f54d01e19419678d7856a0260e168894579692ddc3c1ca8aa79167b9f46149c48acc52eb3ef08fff0115f716cf6ae24ab1b7a071fd19c23b006d0d7";
 
     public static function callAPI($method, $url1, $data)
     {
@@ -48,7 +50,7 @@ class API3commas
         return $result;
     }
 
-    public static function execute($method, $uri, $key, $secret)
+    public static function execute($method, $uri, $key=self::API_KEY, $secret=self::SECRET)
     {
         $signature = hash_hmac('sha256', $uri, $secret);
 

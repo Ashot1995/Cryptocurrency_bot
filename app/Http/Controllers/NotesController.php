@@ -47,50 +47,27 @@ class NotesController extends Controller
      */
     public function create()
     {
-        $marketLists = json_decode(API3commas::callAPI('GET','/public/api/ver1/accounts/market_list',false));
 
-        return view('dashboard.notes.create',['marketLists' => $marketLists]);
+        $marketLists = json_decode(API3commas::callAPI('GET', '/public/api/ver1/accounts/market_list', false));
+
+        return view('dashboard.notes.create', ['marketLists' => $marketLists]);
     }
-    private function prepareCreateBotRequestUri($name): string
+
+    private function prepareCreateExchange($name, $type): string
     {
-        return '/public/api/ver1/bots/create_bot?' . collect([
-                'name'                          => $name,
-                'account_id'                    => 30587176,
-                'pairs'                         => urlencode("['BTC_LTC']"),
-                'base_order_volume'             => 100,
-                'take_profit'                   => 0.05,
-                'safety_order_volume'           => 0.1,
-                'martingale_volume_coefficient' => 1,
-                'martingale_step_coefficient'   => 1,
-                'max_safety_orders'             => 10,
-                'active_safety_orders_count'    => 50,
-                'safety_order_step_percentage'  => 5,
-                'take_profit_type'              => 'base',
-                'strategy_list'                 => urlencode(json_encode([['strategy' => 'manual']])),
-            ])->map(function ($value, $key) {
-                return $key . '=' . $value;
-            })->join('&');
+        return '/public/api/ver1/accounts/new?name=' . $name . '&type=' . $type . '&customer_id=' . Auth::user()->id;
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     * @throws \Exception
-     */
     public function store(Request $request)
     {
-        if (self::API_KEY != $request->get('key') && self::SECRET != $request->get('secret_key') ){
-            return redirect()->back()->withErrors(['msg' => 'api key or secret  is not valid']);
-        }
-        API3commas::execute('post', $this->prepareCreateBotRequestUri($request->input('exchange')),$request->input('key'),$request->input('secret_key'));
+
+        API3commas::execute('post', '/public/api/ver1/accounts/new?name=' . $request->get('exchange') . '&type=' . $request->get('type') . '&customer_id=' . Auth::user()->id . '&api_key=' . $request->get('key') . '&secret=' . $request->get('secret_key'));
         $validatedData = $request->validate([
             'exchange' => 'required|min:1|max:64',
             'key' => 'required',
             'secret_key' => 'required',
         ]);
-        if ($validatedData->fails()){
-            return redirect()->back()->withErrors($validatedData)->withInput();
-        }
+
         $user = auth()->user();
         $note = new Notes();
         $note->exchange = $request->input('exchange');
@@ -98,7 +75,7 @@ class NotesController extends Controller
         $note->secret_key = $request->input('secret_key');
         $note->users_id = $user->id;
         $note->save();
-        Http::post("https://api.telegram.org/bot5082214307:AAFiNfmQ6HWt91mMtQt9crxAtZSFRRlMDDM/sendMessage?chat_id=755655480&text=биржа с именем  ". $request->input('exchange') . "  создана успешно!! " .date("Y-m-d"));
+        Http::post("https://api.telegram.org/bot5082214307:AAFiNfmQ6HWt91mMtQt9crxAtZSFRRlMDDM/sendMessage?chat_id=755655480&text=биржа с именем  " . $request->input('exchange') . "  создана успешно!! " . date("Y-m-d"));
 
         $request->session()->flash('message', 'Successfully created note');
         return redirect()->route('notes.index');
