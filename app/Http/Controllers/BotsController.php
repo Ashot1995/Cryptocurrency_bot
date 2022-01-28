@@ -39,10 +39,10 @@ class BotsController extends Controller
         return view('dashboard.bots.create',compact('bots'));
     }
 
-    private function prepareCreateBotRequestUri($name): string
+    private function prepareCreateBotRequestUri($data): string
     {
         return '/public/api/ver1/bots/create_bot?' . collect([
-                'name'                          => $name,
+                'name'                          => $data['exchange'],
                 'account_id'                    => 30587176,
                 'pairs'                         => urlencode("['BTC_LTC']"),
                 'base_order_volume'             => 100,
@@ -51,8 +51,8 @@ class BotsController extends Controller
                 'martingale_volume_coefficient' => 1,
                 'martingale_step_coefficient'   => 1,
                 'max_safety_orders'             => 10,
-                'active_safety_orders_count'    => 50,
-                'safety_order_step_percentage'  => 5,
+                'active_safety_orders_count'    => $data['deposit'],
+                'safety_order_step_percentage'  => $data['percentage'],
                 'take_profit_type'              => 'base',
                 'strategy_list'                 => urlencode(json_encode([['strategy' => 'manual']])),
             ])->map(function ($value, $key) {
@@ -68,11 +68,9 @@ class BotsController extends Controller
             'percentage' => 'required',
         ]);
 
-//        API3commas::execute('post', $this->prepareCreateBotRequestUri(
-//            $request->input('exchange')),
-//            $request->input('key'),
-//            $request->input('secret_key')
-//        );
+        API3commas::execute('post', $this->prepareCreateBotRequestUri(
+            $request->all())
+        );
 
         $user = auth()->user();
         $note = new Bots();

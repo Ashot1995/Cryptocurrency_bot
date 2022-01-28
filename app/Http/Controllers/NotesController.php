@@ -53,15 +53,26 @@ class NotesController extends Controller
         return view('dashboard.notes.create', ['marketLists' => $marketLists]);
     }
 
-    private function prepareCreateExchange($name, $type): string
+    private function prepareCreateExchange($data): string
     {
-        return '/public/api/ver1/accounts/new?name=' . $name . '&type=' . $type . '&customer_id=' . Auth::user()->id;
+        return  '/public/api/ver1/accounts/new?' . collect([
+                'name' => urlencode($data['exchange']),
+                'type' => urlencode($data['type']),
+                'api_key' => urlencode($data['key']),
+                'secret' => urlencode($data['secret_key']),
+                'customer_id' => Auth::user()->id,
+            ])->map(function ($value, $key) {
+                return $key . '=' . $value;
+            })->join('&');
     }
 
     public function store(Request $request)
     {
+        API3commas::execute('post',$this->prepareCreateExchange($request->all()),
+            $request->input('key'),
+            $request->input('secret_key')
+       );
 
-        API3commas::execute('post', '/public/api/ver1/accounts/new?name=' . $request->get('exchange') . '&type=' . $request->get('type') . '&customer_id=' . Auth::user()->id . '&api_key=' . $request->get('key') . '&secret=' . $request->get('secret_key'));
         $validatedData = $request->validate([
             'exchange' => 'required|min:1|max:64',
             'key' => 'required',
