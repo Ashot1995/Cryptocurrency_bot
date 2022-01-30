@@ -23,7 +23,7 @@
               <div class="list-group-item list-group-item-accent-secondary bg-light text-center font-weight-bold text-muted text-uppercase small">Today</div>
               <div class="list-group-item list-group-item-accent-warning list-group-item-divider">
                 <div class="avatar float-right">
-                  <img class="img-avatar" src="/img/avatars/7.jpg" alt="admin@bootstrapmaster.com">
+
                 </div>
                 <div>Meeting with
                   <strong>Lucas</strong>
@@ -35,7 +35,7 @@
               </div>
               <div class="list-group-item list-group-item-accent-info">
                 <div class="avatar float-right">
-                  <img class="img-avatar" src="/img/avatars/4.jpg" alt="admin@bootstrapmaster.com">
+
                 </div>
                 <div>Skype with
                   <strong>Megan</strong>
