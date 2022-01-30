@@ -11,7 +11,7 @@
                       <i class="fa fa-align-justify"></i> {{ __('Добавить') }}</div>
                     @if ($errors->any())
                         @foreach ($errors->all() as $error)
-                            <div>{{$error}}</div>
+                            <div style="color: red">{{$error}}</div>
                         @endforeach
                     @endif
                     <div class="card-body">
@@ -29,7 +29,6 @@
                                     @endforeach
                                 </select>
                             </div>
-
                             <div class="form-group row">
                                 <label>API ключ</label>
                                 <input type="text" class="form-control" name="key" required/>

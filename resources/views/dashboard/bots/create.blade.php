@@ -9,17 +9,25 @@
                 <div class="card">
                     <div class="card-header">
                       <i class="fa fa-align-justify"></i> {{ __('Создать боти') }}</div>
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <div style="color: red">{{$error}}</div>
+                        @endforeach
+                    @endif
                     <div class="card-body">
                         <form method="POST" action="{{ route('bots.store') }}">
                             @csrf
                             <div class="form-group row">
                                 <label>Биржа</label>
-                                <input class="form-control" type="text" placeholder="{{ __('Биржа') }}" name="exchange" required autofocus>
+                                <select name="exchange" id="" class="form-control">
+                                    @foreach($bots as $bot)
+                                        <option value="{{$bot->id}}">{{$bot->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
-
                             <div class="form-group row">
                                 <label>Депозит</label>
-                                <input type="text" class="form-control" name="deposit" required/>
+                                <input type="number" min="1" max="100"  class="form-control" name="deposit" required/>
                             </div>
                             <div class="form-group row">
                                 <label>Процент дохода(%)</label>

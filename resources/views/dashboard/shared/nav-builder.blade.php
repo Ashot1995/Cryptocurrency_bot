@@ -63,5 +63,8 @@ if(!function_exists('renderDropdown')){
             @endforeach
         @endif
         </ul>
+<form action="{{ url('/logout') }}" method="POST"> @csrf
+    <button type="submit" class="btn btn-ghost-dark btn-block" style="color: white">Logout</button>
+</form>
         <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>
     </div>
