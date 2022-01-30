@@ -134,15 +134,14 @@ class MenusTableSeeder extends Seeder
             'name' => 'sidebar menu'
         ]);
         $this->menuId = DB::getPdo()->lastInsertId();  //set menuId
-        $this->insertLink('guest,user,admin', 'Dashboard', '/', 'cil-speedometer');
         $this->endDropdown();
         $this->insertLink('guest', 'Login', '/login', 'cil-account-logout');
         $this->insertLink('guest', 'Register', '/register', 'cil-account-logout');
 
-        $this->insertTitle('user,admin', 'Cryptocurrency');
         $this->insertLink('user,admin', 'Биржа',     '/notes');
         $this->insertLink('user,admin', 'Бот',     '/bots');
         $this->insertLink('user,admin', 'Статистика',     '/statistics');
+        $this->insertLink('user,admin', 'Подключиться к телеграм боту',     'https://telegram.me/Magnus_crypto_bot');
 
 
 
