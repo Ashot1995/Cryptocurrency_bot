@@ -25,8 +25,8 @@
                         <tbody>
                           @foreach($notes as $note)
                             <tr>
-                              <td><strong>{{ $note->exchange }}</strong></td>
-                              <td><strong>{{ $note->key }}</strong></td>
+                              <td><strong>{{ $note->name }}</strong></td>
+                              <td><strong>{{ $note->api_key }}</strong></td>
                                 <td>
                                 <form action="{{ route('notes.destroy', $note->id ) }}" method="POST">
                                     @method('DELETE')
@@ -38,7 +38,6 @@
                           @endforeach
                         </tbody>
                       </table>
-                      {{ $notes->links() }}
                     </div>
                 </div>
               </div>

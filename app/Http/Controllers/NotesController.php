@@ -38,7 +38,7 @@ class NotesController extends Controller
      */
     public function index()
     {
-        $notes = Notes::with('user')->paginate(20);
+        $notes = json_decode(API3commas::callAPI('GET', '/public/api/ver1/accounts', false));
         return view('dashboard.notes.notesList', ['notes' => $notes]);
     }
 
@@ -56,8 +56,8 @@ class NotesController extends Controller
     {
         return  '/public/api/ver1/accounts/new?' . collect([
                 'name' => urlencode($data['exchange']),
-                'api_key' => 'gPsTitaLhAT3bJRLKUy2kINBmWJW1U0tQSGZbSTVrgVnOlRRswBAleICwl1LpulX',
-                'secret' => 'VQE3lspuxMmP9tcEeNg3NcVDG0DqPwaMfhPpwwluW2aliy4uUjlTTIzoVdH9p2RS',
+                'api_key' => $data['key'],
+                'secret' =>$data['secret_key'],
                 'type' => urlencode($data['type']),
             ])->map(function ($value, $key) {
                 return $key . '=' . $value;
@@ -66,11 +66,12 @@ class NotesController extends Controller
 
     public function store(Request $request)
     {
-       API3commas::execute('post',$this->prepareCreateExchange($request->all()),
-            $request->get('key'),
-           $request->get('secret_key')
-       );
-
+      $res = API3commas::execute('post',$this->prepareCreateExchange($request->all()));
+      if(array_key_exists('error_attributes',$res)){
+          if(array_key_exists('api_key',$res['error_attributes'])){
+              return redirect()->back()->withErrors(['msg' => $res['error_attributes']['api_key'][0]]);
+          }
+      }
         $validatedData = $request->validate([
             'exchange' => 'required|min:1|max:64',
             'key' => 'required',
