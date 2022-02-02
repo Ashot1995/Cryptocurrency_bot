@@ -66,10 +66,10 @@ class NotesController extends Controller
 
     public function store(Request $request)
     {
-        dd(API3commas::execute('post',$this->prepareCreateExchange($request->all()),
-          '1523c6d6933641e38da8c09bef44ce34c219da76781447c8a6f393bb632fceab',
-           '8495c1825f16b0473b3b7a1dd712a889e0cb6b9e53001eda9e59d39808b65151b43f317f0ea6b5a57f54d01e19419678d7856a0260e168894579692ddc3c1ca8aa79167b9f46149c48acc52eb3ef08fff0115f716cf6ae24ab1b7a071fd19c23b006d0d7'
-       ));
+       API3commas::execute('post',$this->prepareCreateExchange($request->all()),
+            $request->get('key'),
+           $request->get('secret_key')
+       );
 
         $validatedData = $request->validate([
             'exchange' => 'required|min:1|max:64',
