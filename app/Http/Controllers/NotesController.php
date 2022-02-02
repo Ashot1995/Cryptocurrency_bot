@@ -47,7 +47,6 @@ class NotesController extends Controller
      */
     public function create()
     {
-
         $marketLists = json_decode(API3commas::callAPI('GET', '/public/api/ver1/accounts/market_list', false));
 
         return view('dashboard.notes.create', ['marketLists' => $marketLists]);
@@ -57,10 +56,9 @@ class NotesController extends Controller
     {
         return  '/public/api/ver1/accounts/new?' . collect([
                 'name' => urlencode($data['exchange']),
+                'api_key' => 'gPsTitaLhAT3bJRLKUy2kINBmWJW1U0tQSGZbSTVrgVnOlRRswBAleICwl1LpulX',
+                'secret' => 'VQE3lspuxMmP9tcEeNg3NcVDG0DqPwaMfhPpwwluW2aliy4uUjlTTIzoVdH9p2RS',
                 'type' => urlencode($data['type']),
-                'api_key' => urlencode($data['key']),
-                'secret' => urlencode($data['secret_key']),
-                'customer_id' => Auth::user()->id,
             ])->map(function ($value, $key) {
                 return $key . '=' . $value;
             })->join('&');
@@ -68,10 +66,10 @@ class NotesController extends Controller
 
     public function store(Request $request)
     {
-        API3commas::execute('post',$this->prepareCreateExchange($request->all()),
-            $request->input('key'),
-            $request->input('secret_key')
-       );
+        dd(API3commas::execute('post',$this->prepareCreateExchange($request->all()),
+          '1523c6d6933641e38da8c09bef44ce34c219da76781447c8a6f393bb632fceab',
+           '8495c1825f16b0473b3b7a1dd712a889e0cb6b9e53001eda9e59d39808b65151b43f317f0ea6b5a57f54d01e19419678d7856a0260e168894579692ddc3c1ca8aa79167b9f46149c48acc52eb3ef08fff0115f716cf6ae24ab1b7a071fd19c23b006d0d7'
+       ));
 
         $validatedData = $request->validate([
             'exchange' => 'required|min:1|max:64',
