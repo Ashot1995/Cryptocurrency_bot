@@ -19,11 +19,15 @@
                             @csrf
                             <div class="form-group row">
                                 <label>Биржа</label>
-                                <select name="exchange" id="" class="form-control">
+                                <select name="account_id" id="" class="form-control">
                                     @foreach($bots as $bot)
                                         <option value="{{$bot->id}}">{{$bot->name}}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="form-group row">
+                                <label>Бот</label>
+                                <input type="text" class="form-control" name="exchange" required/>
                             </div>
                             <div class="form-group row">
                                 <label>Депозит</label>

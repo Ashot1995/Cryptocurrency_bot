@@ -43,7 +43,7 @@ class BotsController extends Controller
     {
         return '/public/api/ver1/bots/create_bot?' . collect([
                 'name'                          => $data['exchange'],
-                'account_id'                    => 30587176,
+                'account_id'                    => $data['account_id'],
                 'pairs'                         => urlencode("['BTC_LTC']"),
                 'base_order_volume'             => 100,
                 'take_profit'                   => 0.05,
@@ -64,13 +64,17 @@ class BotsController extends Controller
     {
         $validatedData = $request->validate([
             'exchange' => 'required|min:1|max:64',
+            'account_id' => 'required',
             'deposit' => 'required',
             'percentage' => 'required',
         ]);
 
-        API3commas::execute('post', $this->prepareCreateBotRequestUri(
+        $res = API3commas::execute('post', $this->prepareCreateBotRequestUri(
             $request->all())
         );
+        if(array_key_exists('error_description',$res)){
+                return redirect()->back()->withErrors(['msg' => $res['error_description']]);
+        }
 
         $user = auth()->user();
         $note = new Bots();
